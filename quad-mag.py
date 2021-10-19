@@ -71,3 +71,4 @@ print("INI: ",inicio)
 print("FIM: ",fim)
 print("Tempo:           ",fim-inicio)
 print("Performance:     ",(fim - inicio)/testes)
+

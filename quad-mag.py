@@ -1,18 +1,13 @@
-#print(list(matrixdic.values()))
-#print(list(matrixdic.keys()))
-#print(list(matrixdic.items()))
-#print(sum(matrixlist[0:4]))
-#matrixdic = {1:16,2:3,3:2,4:13,5:5,6:10,7:11,8:8,9:9,10:6,11:7,12:12,13:4,14:15,15:14,16:1}
-#matrixlist = [16,3,2,13,5,10,11,8,9,6,7,12,4,15,14,1]
-import random
-import datetime
+#matrixlist = [16,3,2,13,5,10,11,8,9,6,7,12,4,15,14,1]# Albrecht Dürer
+import random #gambiarra para gerar as matrizes
+import datetime #para medir o tempo do algoritmo
 inicio=datetime.datetime.now()
 
 def confere(lista):
-    n = len(lista)
-    soma = int(n*(n**2 + 1)/2)
-#    n = 4
-#    soma = 34
+#    n = len(lista) #para qualquer lista quadrada
+#    soma = int(n*(n**2 + 1)/2) #para qualquer lista quadrada
+    n = 4
+    soma = 34
     def soma_lin_col(lista,soma,n):
         for x in range(n):
             if sum(lista[x]) == soma:continue
@@ -38,8 +33,9 @@ def confere(lista):
     else:return False
 
 def gerador():
-#    matriz = [16,3,2,13,5,10,11,8,9,6,7,12,4,15,14,1]
-    matriz = list(range(1,17,1))
+#    matriz = [16,3,2,13,5,10,11,8,9,6,7,12,4,15,14,1] # Albrecht Dürer
+#    matriz = list(range(1,17,1))
+    matriz = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
     random.shuffle(matriz)
     nova_matriz = []
     matriz_int = []
@@ -58,8 +54,7 @@ def salva(y):
     arquivo.write(str(y)+'\n')
     arquivo.close()
 
-testes = 1000000
-#abc = 0 global abc para ver quantas vezes entrou a soma diagonal
+testes = 10**6 #define quantos testes irá fazer
 
 for x in range(testes):
     testando = gerador()

@@ -49,6 +49,7 @@ def gerador():
             z = 0
     return nova_matriz
 
+
 def salva(y):
     arquivo = open("matrizes.txt","a")
     arquivo.write(str(y)+'\n')

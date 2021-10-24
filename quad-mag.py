@@ -1,5 +1,4 @@
 #matrixlist = [16,3,2,13,5,10,11,8,9,6,7,12,4,15,14,1]# Albrecht Dürer
-import random #gambiarra para gerar as matrizes
 import datetime #para medir o tempo do algoritmo
 inicio=datetime.datetime.now()
 
@@ -12,14 +11,11 @@ def confere(lista):
         for x in range(n):
             if sum(lista[x]) == soma:continue
             else:return False
-        print("soma linha ou col")
         return True
 
-    def inverte(lista):
-        return(list(zip(*lista)))
+    def inverte(lista):return(list(zip(*lista)))
 
-    def reverte(lista,n):
-        return[lista[x][::-1] for x in range(n)][::-1]
+    def reverte(lista,n):return[lista[x][::-1] for x in range(n)][::-1]
 
     def soma_diagonais(lista,soma,n):
         if (sum([lista[x][x] for x in range(n)])==soma) and (sum([[lista[x][::-1] for x in range(n)][x][x] for x in range(n)])==soma):return True
@@ -32,36 +28,40 @@ def confere(lista):
         else:return False
     else:return False
 
-def gerador():
 #    matriz = [16,3,2,13,5,10,11,8,9,6,7,12,4,15,14,1] # Albrecht Dürer
-#    matriz = list(range(1,17,1))
-    matriz = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
-    random.shuffle(matriz)
-    nova_matriz = []
-    matriz_int = []
-    z = 0
-    for y in matriz:
-        matriz_int.append(y)
-        z = z + 1
-        if z == 4:
-            nova_matriz.append(matriz_int)
-            matriz_int = []
-            z = 0
-    return nova_matriz
+
+def gerador(testes):
+    base = list(range(1,17))
+    matriz = [[a,b,c,d] for a in base for b in base for c in base for d in base if(a+b+c+d)==34 and len(list(set([a,b,c,d])))==4]#cria todas as combinações possiveis de 4 elementos não repetidos que somam 34
+    a = 0
+    for x in matriz:
+        for w in matriz:
+            if len(list(set(x+w)))==8:
+                for y in matriz:
+                    if len(list(set(x+w+y)))==12:
+                        for z in matriz:
+                            if len(list(set(x+w+y+z)))==16:
+                                a += 1
+                                #print("Confencia nº",a,[x,w,y,z])
+                                if confere([x,w,y,z]):
+                                    salva("matrizes.txt",[x,w,y,z])                                
+                                if a == testes:return False
+                
 
 
-def salva(y):
-    arquivo = open("matrizes.txt","a")
+def salva(x,y):
+    arquivo = open(x,"a")
     arquivo.write(str(y)+'\n')
     arquivo.close()
 
-testes = 10**6 #define quantos testes irá fazer
+#testes = int(input("Digite o número de tentativas: "))
+testes = 10**4 #define quantos testes irá fazer
+gerador(testes)
 
-for x in range(testes):
-    testando = gerador()
-    if confere(testando):
-        salva(testando)
-print(open("matrizes.txt",'r').read())
+#mostra as soluções encontradas
+print("soluções: ",open("matrizes.txt",'r').read())
+
+#mede performance
 fim = datetime.datetime.now()
 print("INI: ",inicio)
 print("FIM: ",fim)

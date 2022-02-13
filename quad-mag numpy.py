@@ -22,7 +22,7 @@ def confere(lista):
     def reverte(lista,n):return[lista[x][::-1] for x in range(n)][::-1]
 
     def soma_diagonais(lista,soma,n):
-        if (sum([lista[x][x] for x in range(n)])==soma) and (sum([[liasta[x][::-1] for x in range(n)][x][x] for x in range(n)])==soma):return True
+        if (sum([lista[x][x] for x in range(n)])==soma) and (sum([[lista[x][::-1] for x in range(n)][x][x] for x in range(n)])==soma):return True
         else:return False
     
     if soma_diagonais(lista,soma,n):
